@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
-import { v4 as uuidv4 } from "uuid";
+import uuid from "react-native-uuid";
 import { useApp } from "../context/AppContext";
 
 export default function AddExpense() {
@@ -16,7 +16,7 @@ export default function AddExpense() {
     }
 
     const expense = {
-      id: uuidv4(),
+      id: uuid.v4(),
       description,
       amount: amt,
       paidBy: user!.id,
