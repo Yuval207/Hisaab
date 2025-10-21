@@ -1,3 +1,4 @@
+import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 import { Alert, Pressable, Text, TextInput, View } from "react-native";
 import uuid from "react-native-uuid";
@@ -7,6 +8,7 @@ export default function AddExpense() {
   const { addExpense, user } = useApp();
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
+  const [paidBy, setPaidBy] = useState(user!.name);
 
   const submit = () => {
     const amt = parseFloat(amount);
@@ -19,7 +21,7 @@ export default function AddExpense() {
       id: uuid.v4(),
       description,
       amount: amt,
-      paidBy: user!.id,
+      paidBy,
       date: new Date().toISOString(),
     };
 
@@ -61,6 +63,25 @@ export default function AddExpense() {
           marginTop: 8,
         }}
       />
+
+      <Text style={{ marginTop: 12 }}>Paid By</Text>
+      <Picker
+        selectedValue={paidBy}
+        onValueChange={(itemValue) => setPaidBy(itemValue)}
+        style={{
+          borderWidth: 1,
+          borderColor: "#ddd",
+          padding: 8,
+          borderRadius: 8,
+          marginTop: 8,
+          backgroundColor: "#f0f0f0",
+        }}
+      >
+        <Picker.Item label="John Doe" value="John Doe" />
+        <Picker.Item label="Jane Smith" value="Jane Smith" />
+        <Picker.Item label="Michael Johnson" value="Michael Johnson" />
+        <Picker.Item label="Sara Lee" value="Sara Lee" />
+      </Picker>
 
       <Pressable
         onPress={submit}
