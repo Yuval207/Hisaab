@@ -2,7 +2,7 @@ import { Expense, Group, User } from "../types";
 
 export const DUMMY_USER: User = {
   id: "u1",
-  name: "Prakarsh Pandey",
+  name: "Prakarsh",
   avatar: "https://via.placeholder.com/120",
 };
 

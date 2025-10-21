@@ -6,6 +6,7 @@ type AppContextType = {
   user: User | null;
   groups: Group[];
   expenses: Expense[];
+  setGroups: React.Dispatch<React.SetStateAction<Group[]>>;
   addExpense: (e: Expense) => void;
   createGroup: (g: Group) => void;
 };
@@ -34,7 +35,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <AppContext.Provider
-      value={{ user, groups, expenses, addExpense, createGroup }}
+      value={{ user, groups, expenses, setGroups, addExpense, createGroup }}
     >
       {children}
     </AppContext.Provider>
