@@ -18,7 +18,16 @@ export default function Groups() {
         }}
       >
         <Text style={{ fontSize: 22, fontWeight: "700" }}>Groups</Text>
-        <Pressable onPress={() => router.push("/group-details")}>
+
+        {/* ✅ Pass mode param */}
+        <Pressable
+          onPress={() =>
+            router.push({
+              pathname: "/group-details",
+              params: { mode: "create" },
+            })
+          }
+        >
           <Text style={{ color: "#007AFF" }}>Create</Text>
         </Pressable>
       </View>
