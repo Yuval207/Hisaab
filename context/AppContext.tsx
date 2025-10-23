@@ -8,6 +8,7 @@ type AppContextType = {
   expenses: Expense[];
   setGroups: React.Dispatch<React.SetStateAction<Group[]>>;
   addExpense: (e: Expense) => void;
+  updateExpense: (id: string, updatedExpense: Expense) => void;
   createGroup: (g: Group) => void;
 };
 
@@ -31,11 +32,39 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const updateExpense = (id: string, updatedExpense: Expense) => {
+    setExpenses((prev) =>
+      prev.map((expense) => (expense.id === id ? updatedExpense : expense))
+    );
+    if (updatedExpense.groupId) {
+      setGroups((prev) =>
+        prev.map((g) =>
+          g.id === updatedExpense.groupId
+            ? {
+                ...g,
+                expenses: g.expenses.map((expense) =>
+                  expense.id === id ? updatedExpense : expense
+                ),
+              }
+            : g
+        )
+      );
+    }
+  };
+
   const createGroup = (g: Group) => setGroups((p) => [...p, g]);
 
   return (
     <AppContext.Provider
-      value={{ user, groups, expenses, setGroups, addExpense, createGroup }}
+      value={{
+        user,
+        groups,
+        expenses,
+        setGroups,
+        addExpense,
+        updateExpense,
+        createGroup,
+      }}
     >
       {children}
     </AppContext.Provider>
